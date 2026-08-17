@@ -1,0 +1,17 @@
+---
+import Logo from './Logo.astro';
+import { nav } from '../data/site.js';
+---
+
+<nav id="nav">
+  <div class="wrap nav-in">
+    <a href="/" class="logo" aria-label="AppHolik home"><Logo size={30} /></a>
+    <div class="nav-links" id="links">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a href="/contact/" class="btn btn-primary">Start a project</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>

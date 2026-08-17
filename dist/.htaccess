@@ -1,0 +1,113 @@
+# ===========================================================================
+#  AppHolik — static site (Astro build output)
+#  This file is copied verbatim into public_html on every deploy.
+# ===========================================================================
+
+Options -Indexes
+DirectoryIndex index.html
+
+# ---------------------------------------------------------------------------
+# 1. Force HTTPS and the non-www hostname
+# ---------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^(.*)$ https://appholik.com/$1 [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^www\.appholik\.com$ [NC]
+  RewriteRule ^(.*)$ https://appholik.com/$1 [R=301,L]
+
+  # -------------------------------------------------------------------------
+  # 2. 301s from the old WordPress URLs
+  # -------------------------------------------------------------------------
+  RewriteRule ^services/?$            /services/ [R=301,L]
+  RewriteRule ^contact/?$             /contact/  [R=301,L]
+  RewriteRule ^about-us/?$            /about/    [R=301,L]
+  RewriteRule ^career/?$              /about/    [R=301,L]
+  RewriteRule ^our-work/?$            /#products [R=301,L]
+
+  # Retire WordPress endpoints so bots stop probing them
+  RewriteRule ^wp-admin(/.*)?$        /          [R=301,L]
+  RewriteRule ^wp-login\.php$         /          [R=301,L]
+  RewriteRule ^xmlrpc\.php$           -          [F,L]
+  RewriteRule ^wp-json(/.*)?$         -          [G,L]
+  RewriteRule ^feed/?$                /          [R=301,L]
+  RewriteRule ^\?p=[0-9]+$            /          [R=301,L]
+
+  # -------------------------------------------------------------------------
+  # 3. Serve /path/ from /path/index.html, add trailing slash to bare paths
+  # -------------------------------------------------------------------------
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]{2,5}$
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteRule ^(.*)$ /$1/ [R=301,L]
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# 4. Custom 404
+# ---------------------------------------------------------------------------
+ErrorDocument 404 /404/index.html
+
+# ---------------------------------------------------------------------------
+# 5. Compression
+# ---------------------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css application/javascript
+  AddOutputFilterByType BROTLI_COMPRESS application/json image/svg+xml
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# 6. Caching — hashed build assets forever, HTML never
+# ---------------------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault                          "access plus 1 month"
+  ExpiresByType text/html                 "access plus 0 seconds"
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
+  ExpiresByType image/svg+xml             "access plus 1 year"
+  ExpiresByType image/png                 "access plus 1 year"
+  ExpiresByType image/x-icon              "access plus 1 year"
+  ExpiresByType application/manifest+json "access plus 1 week"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(css|js|svg|png|ico|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # ---- security headers ----
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# 7. Correct MIME types
+# ---------------------------------------------------------------------------
+<IfModule mod_mime.c>
+  AddType image/svg+xml                 .svg
+  AddType application/manifest+json     .webmanifest
+  AddType font/woff2                    .woff2
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# 8. Block access to dotfiles and deploy metadata
+# ---------------------------------------------------------------------------
+<FilesMatch "^\.(?!well-known)">
+  Require all denied
+</FilesMatch>

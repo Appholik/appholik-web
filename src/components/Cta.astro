@@ -1,0 +1,28 @@
+---
+import { site } from '../data/site.js';
+const {
+  heading = "Let's build the next one",
+  em = 'together',
+  body = "Tell us what you're trying to make. We'll tell you honestly whether we're the right team for it.",
+} = Astro.props;
+---
+
+<section id="contact-cta">
+  <div class="wrap">
+    <div class="cta rv">
+      <h2>{heading} <em>{em}</em></h2>
+      <p>{body}</p>
+      <div class="cta-row">
+        <a href={`mailto:${site.email}`} class="btn btn-primary">{site.email}</a>
+        <a href={site.instagramUrl} class="btn btn-ghost" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"></rect>
+            <circle cx="12" cy="12" r="4.2"></circle>
+            <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"></circle>
+          </svg>
+          @{site.instagram}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

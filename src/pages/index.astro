@@ -1,0 +1,167 @@
+---
+import Base from '../layouts/Base.astro';
+import Marquee from '../components/Marquee.astro';
+import ProductCard from '../components/ProductCard.astro';
+import Cta from '../components/Cta.astro';
+import { hero, products, stats, services, process } from '../data/site.js';
+---
+
+<Base path="/">
+  <header>
+    <div class="grid-bg"></div>
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="glow glow-c"></div>
+
+    <div class="wrap hero-in">
+      <div>
+        <div class="pill rv"><span class="dot"></span><span>{hero.announcement}</span></div>
+        <h1 class="rv">
+          {hero.headingBefore}<br />We <em>{hero.headingEm}</em> {hero.headingAfter}
+        </h1>
+        <p class="lede rv">{hero.lede}</p>
+        <div class="hero-cta rv">
+          <a href="#products" class="btn btn-primary">See our products &rarr;</a>
+          <a href="/contact/" class="btn btn-ghost">Work with us</a>
+        </div>
+        <div class="hero-meta rv">
+          {hero.meta.map((m) => <div><span class="check">&#10022;</span> {m}</div>)}
+        </div>
+      </div>
+
+      <div class="devices rv">
+        <div class="browser">
+          <div class="br-bar"><i></i><i></i><i></i><span class="br-url">owniva.app</span></div>
+          <div class="br-body">
+            <h6>Exposure score</h6>
+            <div class="gauge">
+              <div class="ring"></div>
+              <p>Good bones, but there are real gaps worth closing.</p>
+            </div>
+            <div class="meter"><span>Security<b>71</b></span><div class="track"><div class="fill" style="width:71%"></div></div></div>
+            <div class="meter"><span>Privacy<b>64</b></span><div class="track"><div class="fill" style="width:64%"></div></div></div>
+            <div class="meter"><span>Authenticity<b>58</b></span><div class="track"><div class="fill" style="width:58%"></div></div></div>
+          </div>
+        </div>
+
+        <div class="phone">
+          <div class="screen">
+            <div class="notch"></div>
+            <div class="scr-label">Sandar</div>
+            <div class="scr-title">Now playing</div>
+            <div class="scr-art"></div>
+            <div class="bar w70"></div>
+            <div class="bar w45"></div>
+            <div class="eq"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+
+        <div class="badge-float"><b>5K+</b> tracks streaming</div>
+      </div>
+    </div>
+  </header>
+
+  <Marquee />
+
+  <section id="products">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow mono">Our products</span>
+        <h2>Two live products, <em>built end to end</em></h2>
+        <p>Not case studies borrowed from someone else. Both were designed, engineered and shipped in-house &mdash; and we still run them.</p>
+      </div>
+      <div class="prod-grid">
+        {products.map((p) => <ProductCard product={p} />)}
+        <div class="card c-4 rv" style="display:flex;align-items:center;gap:32px;flex-wrap:wrap">
+          <div style="flex:1;min-width:230px">
+            <h3 style="font-size:22px">Want yours built the same way?</h3>
+            <p>We take on a small number of client products each year, with the same team that ships our own.</p>
+          </div>
+          <a href="/contact/" class="btn btn-primary">Talk to us &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="stats rv">
+        {stats.map((s) => (
+          <div class="stat">
+            <b>{s.suffix ? <>{s.value}<i>{s.suffix}</i></> : <i>{s.value}</i>}</b>
+            <p>{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow mono">What we do for clients</span>
+        <h2>From a rough idea to <em>something live</em></h2>
+      </div>
+      <div class="svc">
+        {services.map((s) => (
+          <div class="svc-row rv">
+            <div class="svc-num">{s.num}</div>
+            <div><h4>{s.title}</h4></div>
+            <div>
+              <p>{s.body}</p>
+              <div class="tags">{s.tags.map((t) => <span class="tag">{t}</span>)}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p style="margin-top:34px">
+        <a href="/services/" class="btn btn-ghost">More about how we work &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow mono">How we work</span>
+        <h2>Four steps, <em>no surprises</em></h2>
+      </div>
+      <div class="steps">
+        {process.map((p) => (
+          <div class="step rv">
+            <div class="step-n">{p.n}</div>
+            <h4>{p.title}</h4>
+            <p>{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="studio">
+    <div class="wrap">
+      <div class="cms rv">
+        <div class="cms-copy">
+          <span class="eyebrow mono">Always current</span>
+          <h3>Updated the moment something changes</h3>
+          <p>A launch, a new client, a price change &mdash; the site reflects it the same day, not next quarter. Nothing here goes stale, because keeping it current takes about a minute.</p>
+          <ul class="cms-list">
+            <li><span class="check">&#10022;</span><span><b>Loads in under a second</b> &mdash; static pages, no database to wait on</span></li>
+            <li><span class="check">&#10022;</span><span><b>Nothing to hack</b> &mdash; no admin panel exposed to the internet</span></li>
+            <li><span class="check">&#10022;</span><span><b>Built the way we build for clients</b> &mdash; this site is a sample of the work</span></li>
+          </ul>
+        </div>
+        <div class="cms-ui">
+          <div class="ui-bar"><i></i><i></i><i></i></div>
+          <div class="ui-field"><label>Page</label><div class="val">Home &mdash; Hero</div></div>
+          <div class="ui-field focus"><label>Headline</label><div class="val">We don't just build apps. We own them.<span class="caret"></span></div></div>
+          <div class="ui-field"><label>Products</label><div class="val">Sandar &middot; Owniva &middot; + Add new</div></div>
+          <div class="ui-field"><label>Announcement bar</label><div class="val">Owniva is live &mdash; social exposure audits</div></div>
+          <div class="ui-save"><span>Last edited just now</span><span class="pub">Publish</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Cta />
+</Base>

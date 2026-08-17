@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+import { stats, site } from '../data/site.js';
+---
+
+<Base
+  title="About"
+  path="/about/"
+  description="AppHolik is a SaaS and mobile app development company operating from the UAE and Canada. We build and run our own products, and take on a small number of client projects."
+>
+  <div class="page-head">
+    <div class="grid-bg"></div>
+    <div class="glow glow-b"></div>
+    <div class="glow glow-c"></div>
+    <div class="wrap page-head-in">
+      <span class="eyebrow mono rv">About</span>
+      <h1 class="rv">A product company, <em>not an agency</em></h1>
+      <p class="rv">
+        Most studios show you other people's work. We show you ours — running,
+        in the stores, with real users on it.
+      </p>
+    </div>
+  </div>
+
+  <section style="padding-top:56px">
+    <div class="wrap">
+      <div class="stats rv">
+        {stats.map((s) => (
+          <div class="stat">
+            <b>{s.suffix ? <>{s.value}<i>{s.suffix}</i></> : <i>{s.value}</i>}</b>
+            <p>{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="two-col">
+        <div class="prose rv">
+          <h3>What we do</h3>
+          <p>
+            AppHolik builds SaaS and mobile applications. Two of them are ours:
+            <strong>Sandar</strong>, a streaming home for Afghan music, and
+            <strong>Owniva</strong>, a social exposure audit that shows people what their
+            public profiles reveal about them.
+          </p>
+          <p>
+            Owning products changes how we build for other people. We've carried the cost of
+            our own shortcuts — the rushed schema, the skipped test, the launch that went out
+            before it was ready — so we're careful about where we let a client take one.
+          </p>
+
+          <h3>How we're set up</h3>
+          <p>
+            We operate from the {site.locations.join(' and ')}, working across
+            iOS, Android and the web. Teams stay small and stay on a project from
+            discovery through to the months after launch — the people who designed it are
+            the people who maintain it.
+          </p>
+        </div>
+
+        <div class="prose rv">
+          <h3>What we believe</h3>
+          <ul>
+            <li><span class="check">&#10022;</span><span><b>Ship it, then improve it.</b> A live product teaches you more in a week than a spec does in a month.</span></li>
+            <li><span class="check">&#10022;</span><span><b>Say the hard thing early.</b> If a plan won't work, you should hear it while it's still cheap to change.</span></li>
+            <li><span class="check">&#10022;</span><span><b>Own your stack.</b> Everything we build is yours — code, accounts, infrastructure. No lock-in.</span></li>
+            <li><span class="check">&#10022;</span><span><b>Small teams, long runs.</b> We'd rather do four projects properly than twelve badly.</span></li>
+          </ul>
+
+          <h3>Working with us</h3>
+          <p>
+            Start with a short conversation. If it looks like a fit, we scope it properly and
+            you get a spec, a timeline and a price before anyone commits to building anything.
+          </p>
+          <p style="margin-top:24px">
+            <a href="/services/" class="btn btn-ghost">See how engagements run &rarr;</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Cta />
+</Base>

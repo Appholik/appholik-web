@@ -1,0 +1,14 @@
+---
+deployment:
+  tasks:
+    # ---------------------------------------------------------------
+    # Replace CPANEL_USER below with your actual cPanel username.
+    # Find it in cPanel > right sidebar > "General Information".
+    # ---------------------------------------------------------------
+    - export DEPLOYPATH=/home/krowzdef/public_html/appholik.com
+    - /bin/mkdir -p $DEPLOYPATH
+    # remove previously deployed build assets so stale files don't linger
+    - /bin/rm -rf $DEPLOYPATH/_astro
+    # copy the built site (including dotfiles such as .htaccess)
+    - /bin/cp -R dist/. $DEPLOYPATH/
+    - /bin/echo "Deployed $(date -u) from $(git rev-parse --short HEAD)" > $DEPLOYPATH/.deployed

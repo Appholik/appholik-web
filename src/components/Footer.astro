@@ -1,0 +1,41 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../data/site.js';
+---
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <a href="/" class="logo logo-lg" aria-label="AppHolik home"><Logo size={38} /></a>
+        <p>
+          A SaaS and mobile app development company. We own and operate Sandar and Owniva,
+          and take on a small number of client products each year.
+        </p>
+      </div>
+      <div class="f-col">
+        <h5>Products</h5>
+        <a href="https://sandar.live" rel="noopener">Sandar</a>
+        <a href="https://owniva.app" rel="noopener">Owniva</a>
+        <a href="/#products">What's next</a>
+      </div>
+      <div class="f-col">
+        <h5>Company</h5>
+        <a href="/about/">About</a>
+        <a href="/services/">Services</a>
+        <a href="/#process">Process</a>
+        <a href="/contact/">Contact</a>
+      </div>
+      <div class="f-col">
+        <h5>Reach us</h5>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <a href={site.instagramUrl} rel="noopener">@{site.instagram}</a>
+        {site.locations.map((loc) => <a href="/contact/">{loc}</a>)}
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>&copy; {site.year} {site.name}. All rights reserved.</span>
+      <span>{site.locations.join(' & ')}</span>
+    </div>
+  </div>
+</footer>

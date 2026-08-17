@@ -1,0 +1,17 @@
+{
+  "name": "appholik-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "ship": "npm run build && git add -A && git commit -m \"Update site\" && git push origin main && git push cpanel main"
+  },
+  "devDependencies": {
+    "astro": "^5.13.5",
+    "@astrojs/sitemap": "^3.4.1"
+  }
+}

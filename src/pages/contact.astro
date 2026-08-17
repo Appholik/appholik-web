@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site.js';
+---
+
+<Base
+  title="Contact"
+  path="/contact/"
+  description="Get in touch with AppHolik — SaaS and mobile app development. Email apps@appholik.com or find us on Instagram."
+>
+  <div class="page-head">
+    <div class="grid-bg"></div>
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="wrap page-head-in">
+      <span class="eyebrow mono rv">Contact</span>
+      <h1 class="rv">Tell us what you're <em>trying to make</em></h1>
+      <p class="rv">
+        The more detail you can give us — what it does, who it's for, when you need it —
+        the more useful our first reply will be.
+      </p>
+    </div>
+  </div>
+
+  <section style="padding-top:20px">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="contact-card rv">
+          <h4>Email</h4>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+          <small>We reply to everything within two working days.</small>
+        </div>
+        <div class="contact-card rv">
+          <h4>Instagram</h4>
+          <a href={site.instagramUrl} rel="noopener">@{site.instagram}</a>
+          <small>Work in progress, launches and behind the scenes.</small>
+        </div>
+        <div class="contact-card rv">
+          <h4>Where we are</h4>
+          <span>{site.locations.join(' · ')}</span>
+          <small>Working across GST+4 and North American hours.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:56px">
+    <div class="wrap">
+      <div class="two-col">
+        <div class="prose rv">
+          <h3>What to include</h3>
+          <ul>
+            <li><span class="check">&#10022;</span><span><b>What you're building</b> — a paragraph is plenty to start</span></li>
+            <li><span class="check">&#10022;</span><span><b>Platforms</b> — iOS, Android, web, or not sure yet</span></li>
+            <li><span class="check">&#10022;</span><span><b>Timing</b> — when you'd like it live, and what's driving that</span></li>
+            <li><span class="check">&#10022;</span><span><b>Budget range</b> — even a rough band helps us tell you quickly whether we're a fit</span></li>
+          </ul>
+        </div>
+        <div class="prose rv">
+          <h3>What happens next</h3>
+          <p>
+            We read it properly and reply with either a straight answer or a few questions.
+            If it looks like a fit, we set up a call. If it isn't, we'll say so and point you
+            somewhere better rather than waste your time.
+          </p>
+          <p>
+            We don't send proposals to people we haven't spoken to, and we don't ask you to
+            sign anything before you know the price.
+          </p>
+          <p style="margin-top:26px">
+            <a href={`mailto:${site.email}`} class="btn btn-primary">Email us &rarr;</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

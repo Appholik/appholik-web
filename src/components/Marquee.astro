@@ -1,0 +1,10 @@
+---
+import { capabilities } from '../data/site.js';
+const doubled = [...capabilities, ...capabilities];
+---
+
+<div class="marquee">
+  <div class="marquee-track">
+    {doubled.map((c) => <span>{c}</span>)}
+  </div>
+</div>

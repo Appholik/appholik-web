@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+import Marquee from '../components/Marquee.astro';
+import { services, process } from '../data/site.js';
+---
+
+<Base
+  title="Services"
+  path="/services/"
+  description="Product design, mobile app development, SaaS and web platforms, and launch support — from AppHolik, the team behind Sandar and Owniva."
+>
+  <div class="page-head">
+    <div class="grid-bg"></div>
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="wrap page-head-in">
+      <span class="eyebrow mono rv">Services</span>
+      <h1 class="rv">From a rough idea to <em>something live</em></h1>
+      <p class="rv">
+        We take on a small number of client products each year. The same team that
+        designs, builds and runs Sandar and Owniva does the work.
+      </p>
+    </div>
+  </div>
+
+  <Marquee />
+
+  <section>
+    <div class="wrap">
+      <div class="svc" style="border-top:none">
+        {services.map((s) => (
+          <div class="svc-row rv">
+            <div class="svc-num">{s.num}</div>
+            <div><h4>{s.title}</h4></div>
+            <div>
+              <p>{s.body}</p>
+              <div class="tags">{s.tags.map((t) => <span class="tag">{t}</span>)}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow mono">How we work</span>
+        <h2>Four steps, <em>no surprises</em></h2>
+        <p>Every engagement runs the same way, so you always know what happens next and what it costs.</p>
+      </div>
+      <div class="steps">
+        {process.map((p) => (
+          <div class="step rv">
+            <div class="step-n">{p.n}</div>
+            <h4>{p.title}</h4>
+            <p>{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="two-col">
+        <div class="prose rv">
+          <h3>How engagements are priced</h3>
+          <p>
+            Discovery is a fixed fee. After that, most projects run as a fixed price per
+            phase, agreed before the phase starts. Longer partnerships can run as a monthly
+            retainer instead.
+          </p>
+          <p>
+            You own everything we produce — designs, source code, accounts and infrastructure.
+            There is no lock-in and no licence to keep paying.
+          </p>
+        </div>
+        <div class="prose rv">
+          <h3>What we don't do</h3>
+          <ul>
+            <li><span class="check">&#10022;</span><span>Rescue projects we didn't scope, without a paid review first</span></li>
+            <li><span class="check">&#10022;</span><span>Fixed-price builds from a one-paragraph brief</span></li>
+            <li><span class="check">&#10022;</span><span>Work we can't do well — we'll say so and point you elsewhere</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Cta
+    heading="Tell us what you're building"
+    em="and we'll be straight with you"
+    body="A short conversation is usually enough to know whether this is a fit."
+  />
+</Base>

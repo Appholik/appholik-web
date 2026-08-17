@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found" path="/404/" description="That page doesn't exist.">
+  <div class="notfound">
+    <div class="glow glow-b"></div>
+    <div class="wrap" style="position:relative;z-index:2">
+      <div class="code">404</div>
+      <h2 style="margin-bottom:16px">This page doesn't <em>exist</em></h2>
+      <p style="color:var(--muted);font-size:17px;max-width:440px;margin:0 auto 30px">
+        It may have moved, or the link that brought you here is out of date.
+      </p>
+      <div class="cta-row">
+        <a href="/" class="btn btn-primary">Back to home</a>
+        <a href="/contact/" class="btn btn-ghost">Contact us</a>
+      </div>
+    </div>
+  </div>
+</Base>

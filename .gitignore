@@ -1,0 +1,10 @@
+node_modules/
+.astro/
+.DS_Store
+*.log
+.env
+.env.*
+
+# NOTE: dist/ is deliberately NOT ignored.
+# Namecheap shared hosting can't run `npm run build` on the server, so the built
+# output is committed and .cpanel.yml copies it into public_html.

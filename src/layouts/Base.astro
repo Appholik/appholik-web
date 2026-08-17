@@ -1,0 +1,112 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site.js';
+import '../styles/global.css';
+
+const {
+  title,
+  description = site.description,
+  path = Astro.url.pathname,
+} = Astro.props;
+
+const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site.tagline}`;
+const canonical = new URL(path, Astro.site ?? 'https://appholik.com').href;
+const ogImage = new URL('/logo/og-image.png', Astro.site ?? 'https://appholik.com').href;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta name="theme-color" content="#080614" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/logo/icon-gradient.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/logo/icon-tile-navy-180.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={site.name} />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: site.name,
+    url: `https://${site.domain}`,
+    logo: `https://${site.domain}/logo/icon-gradient.svg`,
+    description: site.description,
+    email: site.email,
+    sameAs: [site.instagramUrl, 'https://sandar.live', 'https://owniva.app'],
+  })} />
+</head>
+<body>
+  <Nav />
+  <slot />
+  <Footer />
+
+  <script is:inline>
+    (function () {
+      var nav = document.getElementById('nav');
+      var onScroll = function () { nav.classList.toggle('stuck', window.scrollY > 24); };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      var burger = document.getElementById('burger');
+      var links = document.getElementById('links');
+      burger.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        burger.setAttribute('aria-expanded', String(open));
+      });
+      Array.prototype.forEach.call(links.querySelectorAll('a'), function (a) {
+        a.addEventListener('click', function () {
+          links.classList.remove('open');
+          burger.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      var reveal = document.querySelectorAll('.rv');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e, i) {
+            if (e.isIntersecting) {
+              setTimeout(function () { e.target.classList.add('in'); }, i * 70);
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+        Array.prototype.forEach.call(reveal, function (el) { io.observe(el); });
+      } else {
+        Array.prototype.forEach.call(reveal, function (el) { el.classList.add('in'); });
+      }
+
+      Array.prototype.forEach.call(document.querySelectorAll('.card'), function (card) {
+        card.addEventListener('mousemove', function (e) {
+          var r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', e.clientX - r.left + 'px');
+          card.style.setProperty('--my', e.clientY - r.top + 'px');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

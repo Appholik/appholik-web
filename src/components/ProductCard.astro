@@ -1,0 +1,45 @@
+---
+const { product } = Astro.props;
+const p = product;
+const visualClass = { wave: 'v-sandar', shield: 'v-owniva', dots: 'v-next' }[p.visual] ?? 'v-next';
+const waveHeights = [30, 62, 96, 44, 78, 36, 88, 52, 70, 32, 84, 46];
+const external = p.url.startsWith('http');
+---
+
+<div class={`card c-${p.span} rv`}>
+  <div class={`p-visual ${visualClass}`}>
+    {p.visual === 'wave' && (
+      <>
+        <div class="ring-deco" style="width:210px;height:210px"></div>
+        <div class="ring-deco" style="width:140px;height:140px"></div>
+        <div class="wave">
+          {waveHeights.map((h) => <i style={`height:${h}%`}></i>)}
+        </div>
+      </>
+    )}
+    {p.visual === 'shield' && (
+      <>
+        <div class="ring-deco" style="width:170px;height:170px"></div>
+        <div class="shield"><span>65</span></div>
+      </>
+    )}
+    {p.visual === 'dots' && (
+      <div class="dots">
+        {Array.from({ length: 9 }).map(() => <i></i>)}
+      </div>
+    )}
+  </div>
+
+  <span class={`badge ${p.status}`}>
+    {p.status === 'live' && <span class="d"></span>}
+    {p.statusLabel}
+  </span>
+  <h3>{p.name}</h3>
+  <p>{p.blurb}</p>
+  <a href={p.url} class="card-link" rel={external ? 'noopener' : undefined}>
+    {p.linkLabel}
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true">
+      <path d="M5 12h14M13 6l6 6-6 6"></path>
+    </svg>
+  </a>
+</div>
