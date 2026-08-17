@@ -57,6 +57,17 @@ click in cPanel → Git Version Control → Deploy HEAD Commit.
 `.cpanel.yml` contains a `CPANEL_USER` placeholder that must be filled in with the real
 cPanel username before the first deploy.
 
+## Instagram section
+
+The homepage Instagram grid is fetched **at build time** in `src/data/instagram.js`,
+not client-side. Don't convert it to a browser-side widget without a good reason — the
+point is no third-party JavaScript on the page.
+
+If `INSTAGRAM_FEED_URL` isn't set it falls back to gradient placeholder tiles and the
+build still succeeds. Never let a social feed break the build.
+
+Setup lives in `INSTAGRAM.md`.
+
 ## Careful with
 
 - **`.htaccess`** — it forces HTTPS and holds the 301s from the old WordPress URLs.

@@ -232,17 +232,34 @@ h2 em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight
 .cms-list{list-style:none;display:grid;gap:12px}
 .cms-list li{display:flex;gap:11px;align-items:flex-start;font-size:15px;color:var(--muted)}
 .cms-list li b{color:var(--text);font-weight:500}
-.cms-ui{background:var(--surface);border-left:1px solid var(--line);padding:28px;display:flex;flex-direction:column;gap:14px}
-.ui-bar{display:flex;gap:6px;margin-bottom:6px}
-.ui-bar i{width:10px;height:10px;border-radius:50%;background:var(--line-2)}
-.ui-field{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--bg)}
-.ui-field label{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:7px}
-.ui-field .val{font-size:14.5px}
-.ui-field.focus{border-color:rgba(224,32,136,.6);box-shadow:0 0 0 3px var(--accent-soft)}
-.caret{display:inline-block;width:1.5px;height:15px;background:var(--brand-magenta);vertical-align:-2px;animation:blink 1s steps(2) infinite}
-@keyframes blink{50%{opacity:0}}
-.ui-save{margin-top:auto;display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--muted)}
-.ui-save .pub{background:var(--grad);color:#fff;padding:8px 17px;border-radius:9px;font-weight:600;font-size:13px}
+/* ---------- Instagram panel (replaces the old CMS mock) ---------- */
+.ig-panel{background:var(--surface);border-left:1px solid var(--line);padding:26px;
+  display:flex;flex-direction:column;justify-content:center;gap:16px}
+.ig-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.ig-handle{display:flex;align-items:center;gap:10px;font-size:14.5px;font-weight:500;letter-spacing:-.01em}
+.ig-avatar{width:26px;height:26px;border-radius:50%;flex-shrink:0;background:var(--grad);
+  box-shadow:0 0 0 2px var(--surface),0 0 0 3.5px rgba(224,32,136,.45)}
+.ig-view{font-size:13px;color:var(--muted);transition:color .2s}
+.ig-view:hover{color:var(--text)}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ig-tile{position:relative;aspect-ratio:1/1;border-radius:11px;overflow:hidden;display:block;
+  background:var(--surface-2);border:1px solid var(--line);
+  transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s}
+.ig-tile:hover{transform:translateY(-3px);border-color:var(--line-2)}
+.ig-tile img{width:100%;height:100%;object-fit:cover;display:block}
+.ig-hover{position:absolute;inset:0;opacity:0;transition:opacity .3s;
+  background:linear-gradient(140deg,rgba(248,160,48,.34),rgba(224,32,136,.34) 52%,rgba(88,64,152,.34))}
+.ig-tile:hover .ig-hover{opacity:1}
+.ig-play{position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;
+  background:rgba(8,6,20,.62);backdrop-filter:blur(4px);display:grid;place-items:center;color:#fff;z-index:2}
+/* placeholder tiles before a real feed is connected */
+.ig-placeholder{position:absolute;inset:0;background:var(--grad);opacity:.30}
+.ig-tile[data-tone="1"] .ig-placeholder{opacity:.20;transform:scale(1.4) rotate(18deg)}
+.ig-tile[data-tone="2"] .ig-placeholder{opacity:.38;transform:scale(1.2) rotate(-24deg)}
+.ig-tile[data-tone="3"] .ig-placeholder{opacity:.16;transform:scale(1.6) rotate(40deg)}
+.ig-tile[data-tone="4"] .ig-placeholder{opacity:.30;transform:scale(1.3) rotate(-8deg)}
+.ig-tile[data-tone="5"] .ig-placeholder{opacity:.22;transform:scale(1.5) rotate(60deg)}
+.ig-note{font-size:11.5px;color:var(--muted);text-align:center;opacity:.7;margin-top:2px}
 
 /* CTA */
 .cta{border-radius:28px;padding:76px 52px;text-align:center;position:relative;overflow:hidden;
@@ -278,7 +295,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 34px;background:var(--bg-
   .c-4,.c-2,.c-3,.c-6{grid-column:span 2}
   .steps{grid-template-columns:repeat(2,1fr)}
   .cms{grid-template-columns:1fr}
-  .cms-ui{border-left:none;border-top:1px solid var(--line)}
+  .ig-panel{border-left:none;border-top:1px solid var(--line)}
   .f-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:720px){

@@ -115,3 +115,31 @@ export const process = [
   { n: 3, title: 'Build',  body: 'Two-week sprints with a working build in your hands at the end of each one. No black box.' },
   { n: 4, title: 'Ship',   body: 'We handle store review, launch and the first months of iteration while real users arrive.' },
 ];
+
+// ---------------------------------------------------------------------------
+// Instagram section
+// ---------------------------------------------------------------------------
+
+export const instagram = {
+  eyebrow: 'From the studio',
+  heading: 'What we’re working on',
+  body:
+    'Launches, work in progress and the occasional look behind the scenes. The grid here is our actual Instagram — it refreshes every time the site is deployed.',
+  points: [
+    'Product launches and release notes',
+    'Design and build in progress',
+    'The team, and how we actually work',
+  ],
+};
+
+// Shown when no live feed is configured, or if the feed is unreachable at build
+// time. Replace `image` with real files in public/images/instagram/ and point
+// `permalink` at the actual posts.
+export const instagramFallback = [
+  { id: 'f1', permalink: 'https://instagram.com/appholik_appdev', image: null, alt: 'Sandar app', tone: 0 },
+  { id: 'f2', permalink: 'https://instagram.com/appholik_appdev', image: null, alt: 'Owniva scan', tone: 1 },
+  { id: 'f3', permalink: 'https://instagram.com/appholik_appdev', image: null, alt: 'Design work', tone: 2 },
+  { id: 'f4', permalink: 'https://instagram.com/appholik_appdev', image: null, alt: 'Behind the scenes', tone: 3 },
+  { id: 'f5', permalink: 'https://instagram.com/appholik_appdev', image: null, alt: 'Release notes', tone: 4 },
+  { id: 'f6', permalink: 'https://instagram.com/appholik_appdev', image: null, alt: 'The team', tone: 5 },
+];

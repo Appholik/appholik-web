@@ -3,6 +3,10 @@
 Static site for AppHolik. Astro, no database, no WordPress. Deploys to Namecheap cPanel
 via `git push`.
 
+> **New here? Open [START-HERE.md](./START-HERE.md).** It's the single runbook — install,
+> first build, Instagram, WordPress backup, deploy, and the day-to-day update loop.
+> Every other file is reference.
+
 ## Quick start
 
 ```bash
@@ -28,6 +32,7 @@ npm run build && git add -A && git commit -m "..." && git push cpanel main
 ```
 src/
   data/site.js          ← all copy and content. Edit this, not the HTML.
+  data/instagram.js     ← fetches the IG feed at build time (see INSTAGRAM.md)
   layouts/Base.astro    ← <head>, nav, footer, scripts. Wraps every page.
   components/
     Logo.astro          ← brand lockup as inline SVG
@@ -35,6 +40,7 @@ src/
     Footer.astro
     Marquee.astro       ← scrolling capabilities strip
     ProductCard.astro   ← one product tile
+    InstagramFeed.astro ← @appholik_appdev grid on the homepage
     Cta.astro           ← closing call-to-action block
   pages/
     index.astro         ← /
@@ -76,3 +82,4 @@ Tracked so they don't get forgotten:
 - [ ] Team / founder section
 - [ ] Individual product pages for Sandar and Owniva
 - [ ] Analytics
+- [ ] Connect the live Instagram feed — see [INSTAGRAM.md](./INSTAGRAM.md)

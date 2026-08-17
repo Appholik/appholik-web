@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Marquee from '../components/Marquee.astro';
 import ProductCard from '../components/ProductCard.astro';
+import InstagramFeed from '../components/InstagramFeed.astro';
 import Cta from '../components/Cta.astro';
 import { hero, products, stats, services, process } from '../data/site.js';
 ---
@@ -138,30 +139,7 @@ import { hero, products, stats, services, process } from '../data/site.js';
     </div>
   </section>
 
-  <section id="studio">
-    <div class="wrap">
-      <div class="cms rv">
-        <div class="cms-copy">
-          <span class="eyebrow mono">Always current</span>
-          <h3>Updated the moment something changes</h3>
-          <p>A launch, a new client, a price change &mdash; the site reflects it the same day, not next quarter. Nothing here goes stale, because keeping it current takes about a minute.</p>
-          <ul class="cms-list">
-            <li><span class="check">&#10022;</span><span><b>Loads in under a second</b> &mdash; static pages, no database to wait on</span></li>
-            <li><span class="check">&#10022;</span><span><b>Nothing to hack</b> &mdash; no admin panel exposed to the internet</span></li>
-            <li><span class="check">&#10022;</span><span><b>Built the way we build for clients</b> &mdash; this site is a sample of the work</span></li>
-          </ul>
-        </div>
-        <div class="cms-ui">
-          <div class="ui-bar"><i></i><i></i><i></i></div>
-          <div class="ui-field"><label>Page</label><div class="val">Home &mdash; Hero</div></div>
-          <div class="ui-field focus"><label>Headline</label><div class="val">We don't just build apps. We own them.<span class="caret"></span></div></div>
-          <div class="ui-field"><label>Products</label><div class="val">Sandar &middot; Owniva &middot; + Add new</div></div>
-          <div class="ui-field"><label>Announcement bar</label><div class="val">Owniva is live &mdash; social exposure audits</div></div>
-          <div class="ui-save"><span>Last edited just now</span><span class="pub">Publish</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <InstagramFeed />
 
   <Cta />
 </Base>

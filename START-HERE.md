@@ -1,263 +1,347 @@
-# START HERE — the exact prompts, in order
+# START HERE
 
-Copy each block into Claude Code, one at a time. Wait for it to finish before the next one.
+**This is the only file you need to follow.** The others are reference — you'll be told
+when to open one.
 
-**You do not need to attach or share any files.** Claude Code reads the whole project
-folder on its own. It has already read `CLAUDE.md`, which tells it the rules for this site.
-
----
-
-## Before you open Claude Code
-
-```bash
-cd ~/Projects/appholik-web     # wherever you unzipped it
-claude
-```
-
-You should see a prompt. That's it — everything below gets typed there.
+Work top to bottom. Don't skip. Tick things off as you go.
 
 ---
 
-# SESSION 1 — Get it running
+## First, three answers
 
-Goal: a site that builds and that you can see in a browser. Don't skip ahead.
+**What do I share with Claude Code?**
+Nothing. You open the project folder and run `claude`. It reads every file itself,
+including `CLAUDE.md`, which already tells it the rules for this site. The only files
+you'll ever add are your own screenshots later.
 
-### Prompt 1
+**What am I replacing?**
+The contents of `public_html` on your Namecheap hosting — that's the WordPress site.
+Your domain, email, and databases are untouched.
 
-```
-Read CLAUDE.md and README.md, then give me a one-paragraph summary of what
-this project is and how it deploys. Don't change anything yet.
-```
-
-*Why:* confirms it understands the project before touching it. If the summary is wrong,
-something's off — say so before continuing.
-
-### Prompt 2
-
-```
-Run npm install, then npm run build. If the build fails, read the errors,
-fix them, and run it again until it passes. Show me a summary of every
-change you made and why.
-```
-
-*Why:* this project was written without the build ever being run, so expect one or two
-errors. This is the single most important prompt.
-
-*Expect:* a few minutes of work. It may edit `.astro` files. That's fine.
-
-### Prompt 3
-
-```
-Start the dev server.
-```
-
-Open **http://localhost:4321** in your browser.
-
-Now go through it yourself:
-- Click every link in the header and footer
-- Click every link in the footer's four columns
-- Make the browser window narrow, phone-width, and scroll every page
-- Check the logo looks right in both the header and the footer
-
-Write down anything wrong. Press `Ctrl + C` in the terminal to stop the server.
-
-### Prompt 4
-
-```
-Here's what I found: [describe each problem, one per line, saying which
-page and roughly where on the page]. Fix them one at a time and tell me
-what you did for each.
-```
-
-### Prompt 5
-
-```
-Run the build again and confirm it passes. Then check that every internal
-link on every page points to a real page.
-```
-
-**Stop here.** Don't deploy yet. Go set up cPanel using `DEPLOY.md` Steps 0–5.
+**How long?**
+About two hours the first time, spread over the stages below. After that, a change
+takes five minutes.
 
 ---
 
-# SESSION 2 — First deploy
+# STAGE 1 — Install the tools (20 min)
 
-Start fresh:
+- [ ] **1.1** Install Node.js — download the **LTS** version from [nodejs.org](https://nodejs.org)
 
-```
-/clear
-```
+- [ ] **1.2** Check it worked. Open Terminal (Mac) or PowerShell (Windows):
+  ```bash
+  node -v
+  ```
+  You need v20 or higher.
 
-### Prompt 1
+- [ ] **1.3** Install Claude Code
 
-```
-My cPanel username is: [paste it here]
-Update .cpanel.yml with it and show me the result.
-```
+  Mac / Linux:
+  ```bash
+  curl -fsSL https://claude.ai/install.sh | bash
+  ```
+  Windows PowerShell:
+  ```powershell
+  irm https://claude.ai/install.ps1 | iex
+  ```
 
-### Prompt 2
+- [ ] **1.4** Check it worked:
+  ```bash
+  claude --version
+  ```
 
-```
-Set up git for this project. Initialise the repo, make the first commit with
-a clear message, and tell me exactly which commands I need to run myself to
-add the GitHub and cPanel remotes. Don't push anything.
-```
+- [ ] **1.5** Unzip `appholik-web.zip` somewhere sensible — `~/Projects/appholik-web` or
+  `C:\Projects\appholik-web`. **Not** in iCloud, Dropbox or OneDrive.
 
-*Why the last sentence:* pushing is yours to do. You should see what's going out.
+---
 
-### Prompt 3
+# STAGE 2 — Get the site running on your machine (20 min)
 
-Now run the push commands it gave you. Then in cPanel:
-**Git Version Control → Manage → Pull or Deploy → Deploy HEAD Commit**
+- [ ] **2.1** Open the project:
+  ```bash
+  cd ~/Projects/appholik-web
+  claude
+  ```
+  First run opens a browser to log in. Needs a Claude Pro, Max or Team plan.
 
-Visit appholik.com. Hard-refresh with **Cmd/Ctrl + Shift + R**.
+- [ ] **2.2** Paste this:
 
-### If the site is broken
+  ```
+  Read CLAUDE.md and README.md, then give me a one-paragraph summary of what
+  this project is and how it deploys. Don't change anything yet.
+  ```
+
+  If the summary sounds wrong, stop and tell it so before continuing.
+
+- [ ] **2.3** Paste this — **the most important step**:
+
+  ```
+  Run npm install, then npm run build. If the build fails, read the errors,
+  fix them, and run it again until it passes. Show me a summary of every
+  change you made and why.
+  ```
+
+  This project was written without the build ever being run, so expect one or two
+  errors. Let it work through them.
+
+- [ ] **2.4** Paste this:
+
+  ```
+  Start the dev server.
+  ```
+
+- [ ] **2.5** Open **http://localhost:4321** and check it yourself:
+  - Click every link in the header
+  - Click every link in all four footer columns
+  - Drag the window narrow to phone width, scroll every page
+  - Check the logo looks right top and bottom
+
+  Write down anything wrong. Press `Ctrl + C` in the terminal when done.
+
+- [ ] **2.6** If you found problems:
+
+  ```
+  Here's what I found: [one problem per line — which page, and where on it].
+  Fix them one at a time and tell me what you did for each.
+  ```
+
+**Stop here if the site looks right locally. Don't deploy yet.**
+
+---
+
+# STAGE 3 — Connect Instagram (15 min)
+
+The homepage has an Instagram section showing grey placeholder tiles right now.
+
+- [ ] **3.1** Switch **@appholik_appdev** to a Creator account
+  Instagram app → Settings → Account type and tools → Switch to professional account.
+  Free and reversible. Meta requires it for any website feed.
+
+- [ ] **3.2** Sign up free at [behold.so](https://behold.so)
+
+- [ ] **3.3** Connect @appholik_appdev, create a feed, set it to **6 posts**,
+  open the **JSON feed** tab, copy the URL
+
+- [ ] **3.4** Tell Claude Code:
+
+  ```
+  Create a .env file with this Instagram feed URL: [paste your URL]
+  Then run npm run build and tell me whether it fetched real posts or fell
+  back to placeholders.
+  ```
+
+  You want to see `[instagram] fetched 6 posts.`
+
+- [ ] **3.5** Look at it:
+  ```
+  Start the dev server.
+  ```
+  Real posts should now be in that grid.
+
+> Don't want to use Behold? You can put six square images in
+> `public/images/instagram/` instead and update by hand. Details in `INSTAGRAM.md`.
+
+---
+
+# STAGE 4 — Back up WordPress (20 min)
+
+**Do not skip this. Do it before touching the server.**
+
+- [ ] **4.1** cPanel → **Backup** → *Download a Full Account Backup*. Save it to your computer.
+
+- [ ] **4.2** cPanel → **File Manager** → open `public_html`
+
+- [ ] **4.3** Select everything → **Compress** → zip → name it `old-wp-backup.zip`
+
+- [ ] **4.4** **Move that zip OUT of `public_html`**, up into your home directory.
+  If it stays in `public_html` anyone can download your whole site.
+
+- [ ] **4.5** Delete the remaining files from `public_html` so it's empty
+
+- [ ] **4.6** Leave the WordPress database alone. You can drop it in a month once
+  you're confident.
+
+---
+
+# STAGE 5 — Set up the server connection (30 min)
+
+Open **`DEPLOY.md`** and follow Steps 1 through 5. In short:
+
+- [ ] **5.1** cPanel → **Manage Shell** → turn SSH **on**
+
+- [ ] **5.2** Create an SSH key and add it in cPanel → **Manage SSH Keys** → Import →
+  then **Authorize** it
+  (paste the `.pub` file only — never the private key)
+
+- [ ] **5.3** Find your cPanel username — cPanel → right sidebar → *General Information*
+
+- [ ] **5.4** Tell Claude Code:
+
+  ```
+  My cPanel username is: [paste it]
+  Update .cpanel.yml with it and show me the result.
+  ```
+
+- [ ] **5.5** cPanel → **Git Version Control** → **Create**
+  - Repository Path: `repositories/appholik-web`
+  - Name: `appholik-web`
+  - Copy the clone URL it shows you
+
+- [ ] **5.6** Create an empty repo on GitHub (no README)
+
+- [ ] **5.7** Tell Claude Code:
+
+  ```
+  Set up git for this project. Initialise the repo, make the first commit with
+  a clear message, and tell me the exact commands to add these two remotes:
+  GitHub: [paste your GitHub URL]
+  cPanel: [paste the cPanel clone URL]
+  Don't push anything — I'll run the push myself.
+  ```
+
+- [ ] **5.8** Run the push commands it gives you
+
+---
+
+# STAGE 6 — Go live (10 min)
+
+- [ ] **6.1** cPanel → **Git Version Control** → your repo → **Manage** →
+  **Pull or Deploy** → **Deploy HEAD Commit**
+
+- [ ] **6.2** Visit **appholik.com** and hard-refresh: **Cmd/Ctrl + Shift + R**
+
+- [ ] **6.3** cPanel → **SSL/TLS Status** → tick both `appholik.com` and
+  `www.appholik.com` → **Run AutoSSL**
+
+- [ ] **6.4** Wait a few minutes, then check `https://appholik.com` loads with a padlock
+
+### If something's broken
 
 ```
 The live site is showing [describe exactly what you see — a 500 error, a
-redirect loop, unstyled text, the old WordPress page]. Read DEPLOY.md's
+redirect loop, unstyled text, or the old WordPress page]. Read DEPLOY.md's
 troubleshooting section and tell me the most likely cause before changing anything.
 ```
 
 ---
 
-# SESSION 3 ONWARD — Fixing and improving
+# STAGE 7 — From now on, updating the site
 
-Always `/clear` between unrelated tasks.
-
-## The pattern for every change
+This is the whole loop. Five minutes.
 
 ```
-1.  [your request]
-2.  Show me the diff
-3.  Start the dev server        ← then actually look at it
-4.  Build, commit, and push to both remotes
-5.  Click Deploy in cPanel
+1.  Ask Claude Code for the change
+2.  "Show me the diff"
+3.  "Start the dev server"  →  look at it in your browser
+4.  "Build, commit, and push to both remotes"
+5.  cPanel → Git Version Control → Deploy HEAD Commit
+6.  Hard-refresh the site
 ```
 
-## Ready-to-paste prompts for the open items
+**Never skip step 3.** Claude Code can't see the page. You can.
 
-### Real screenshots
+## Changing text
 
-First, put your screenshots in `public/images/` yourself. Then:
+Almost all wording lives in one file. Just say what you want:
 
+```
+Change the hero headline to "[new text]".
+```
+
+```
+Update the Owniva description on the homepage to: "[new text]"
+```
+
+It knows to edit `src/data/site.js` rather than the HTML.
+
+## The bigger jobs, when you're ready
+
+Do these one at a time, in whatever order matters most to you.
+
+**Real app screenshots** — put them in `public/images/` first, then:
 ```
 I've added real app screenshots to public/images/. Replace the CSS phone
 mockup in the homepage hero with the real Sandar screenshot, keeping the
-phone frame around it. Optimise the image so it doesn't slow the page down.
-Show me before and after.
+phone frame around it. Optimise it so it doesn't slow the page down.
 ```
 
-### Contact form
-
+**A working contact form:**
 ```
-The contact page only has a mailto link. I want a real working form that
-sends to apps@appholik.com.
-
-Constraints: this is a static site on Namecheap cPanel shared hosting. There
-is no Node server. It must not need a cookie banner.
-
-Use plan mode. Research the options, give me two or three with costs and
-trade-offs, and wait for me to choose before building anything.
+The contact page only has a mailto link. I want a real form that sends to
+apps@appholik.com. Constraints: static site on Namecheap cPanel shared
+hosting, no Node server, and it must not need a cookie banner.
+Use plan mode — research the options, give me two or three with costs, and
+wait for me to choose before building.
 ```
 
-### Product pages
-
+**Product pages:**
 ```
-Create product pages at /products/sandar/ and /products/owniva/.
-
-Each needs: a hero with the product name and description, a feature list,
-and a button linking to the live site. Pull all the copy from src/data/site.js
-so it lives in one place. Match the styling of the existing pages exactly.
-
-Then update the product cards on the homepage to link to these pages instead
-of straight out to the external sites, and add both to the footer under Products.
+Create product pages at /products/sandar/ and /products/owniva/. Each needs
+a hero, a feature list, and a button to the live site. Pull the copy from
+src/data/site.js. Match the existing page styling. Then link the homepage
+product cards to these pages and add both to the footer.
 ```
 
-### Testimonial
-
+**A real testimonial:**
 ```
-Add a testimonials section to the homepage, between Products and Stats.
-Store the content in src/data/site.js as an array so I can add more later.
-
-Here's the first real one: [paste the actual quote, the person's name, and
-their role].
-
-Do not invent any placeholder testimonials. If I only give you one, show one.
-```
-
-### Analytics
-
-```
-Add privacy-friendly analytics to the site — something that doesn't require
-a cookie banner. Use plan mode: compare two or three options for a static
-site, tell me the cost of each, and wait for my choice.
-```
-
-### A whole new page
-
-```
-Add a [name] page at /[url]/.
-
-It should contain: [list the sections you want].
-
-Match the existing page structure — use the Base layout, put any repeated
-text in src/data/site.js, and add it to the header nav and the footer.
+Add a testimonials section to the homepage between Products and Stats.
+Store it in src/data/site.js as an array so I can add more later.
+Here's the first real one: [paste the quote, name and role].
+Do not invent any placeholder testimonials.
 ```
 
 ---
 
-# Prompts that save you trouble
+# Cheat sheet
 
-Keep these handy.
-
-| When | Say this |
+| Situation | What to type |
 |---|---|
-| Before anything structural | `Use plan mode. Don't change files yet — tell me your approach first.` |
+| Starting an unrelated task | `/clear` |
+| Before anything big | `Use plan mode. Don't change files yet — tell me your approach first.` |
 | After any change | `Show me the diff` |
-| Before shipping | `Run the build and confirm it passes` |
-| Worried about knock-on effects | `Did that change affect any other page? Check and tell me.` |
-| It went the wrong direction | `/undo` |
-| It's several changes deep in the wrong direction | `Revert everything you changed in this session. Don't commit.` |
-| The build breaks | `The build is failing. Explain the error in plain English, then fix it.` |
-| Starting something unrelated | `/clear` |
+| Before pushing | `Run the build and confirm it passes` |
+| Worried it broke something else | `Did that change affect any other page? Check and tell me.` |
+| It went wrong | `/undo` |
+| It went badly wrong | `Revert everything you changed in this session. Don't commit.` |
+| Build errors | `The build is failing. Explain the error in plain English, then fix it.` |
 
----
-
-# Things to tell it if it drifts
-
-Paste these if you see it going wrong:
+## If it drifts off the rules
 
 ```
 Put that text in src/data/site.js, not in the .astro file.
 ```
-
 ```
 Don't invent statistics or testimonials. If we don't have a real one, leave it out.
 ```
-
 ```
-We only have two products: Sandar and Owniva. Fawree and Khedmat don't exist anymore.
+We only have two products: Sandar and Owniva.
 ```
-
 ```
-Our locations are UAE and Canada. Not Kabul, not Dubai, not Los Angeles.
+Our locations are UAE and Canada.
 ```
-
 ```
-Don't add a JavaScript framework. This site is static on purpose.
-```
-
-```
-Explain what that .htaccess change does and what could break, before you apply it.
+Explain what that .htaccess change does and what could break, before applying it.
 ```
 
 ---
 
-# The one rule
+# The other files
+
+You don't need to read these. They're here for when something points you at them.
+
+| File | When you need it |
+|---|---|
+| `DEPLOY.md` | Stage 5, and if a deploy breaks |
+| `INSTAGRAM.md` | Stage 3, or to change how the feed works |
+| `README.md` | The list of remaining work |
+| `CLAUDE.md` | Claude Code reads this itself — you don't have to |
+| `CLAUDE-CODE-GUIDE.md` | Deeper background on working with Claude Code |
+
+---
+
+# One rule
 
 **Look at it in a browser before you push it.**
 
-Claude Code will tell you a change worked. It's usually right. But it can't see
-the page — you can. Thirty seconds in the browser catches things no build check will.
+Ten small deploys beat one big one. If a change feels risky, ship it on its own so
+you know what broke.
